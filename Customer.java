@@ -1,20 +1,39 @@
+
+
+
 public class Customer {
 
 int id;
 private String name;
 private Long phone;
-String Sara;
 
 
-public Customer( int , String , String, Long){
 
+public Customer( int id , String  name , Long  phone){
+this .id=id;this.name=name;this.phone=phone;
 }
 
 public String toString(){
-hi sara
- hi rawan
+return "the id >>"+id + "the name >> \t"+ name +" the phone >> \t"+phone;
 }
 
+
+
+public int getId(){
+
+return id;
+
+}
+
+public String getName(){
+return name;
+
+}
+
+public String getPhone(){
+return phone;
+
+}
 //setter and getter
 
 }//end customer class
@@ -41,24 +60,31 @@ public String toString(){
 
 class CarRental {
 
-protected numOfCars;
+private  int numOfCars ;
 
 
-public CarRental( int size){ 
+public  CarRental( int size){ //VIP or Economy
+numOfCars=0;
 
+//Array 
 }
 
 public void addCar(Car c ){
+if(numOfCars<carlist.length){
+carlist[numOfCars++]=c
+System.out.println("Add ");}
+else
+Syastem.out.println("not Add");
 
 }
 
 
-public saveToFile() {
+public  void  saveToFile() {
 
 }
 
 
-public loadFromFile(){
+public  void loadFromFile(){
 
 }
 
@@ -78,8 +104,8 @@ public VIP[] searchAvailableVIP(){
 public Economy[] searchAvailableEconomy() {
 
 }
-public  Car getCar(PN: String){
-
-}
+public  Car getCar( String PN){
+  //.equals(PN)
+  }
 
 }// end CarRental class 

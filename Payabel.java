@@ -1,3 +1,6 @@
+import java .util.*;
+import  java.io.*; 
+
 public interface Payabel{
 
 public String printBill(int days);
@@ -12,7 +15,7 @@ protected String model;
 protected String color;
 protected boolean available;
 protected CarRental [] carlist;
-
+//  *object coustmer in car class
 
 public Car ( String plate, double rice, String model, String color) {
 plateNo = plate; pricePerDay = rice; this.model = model; this.color = color; 
@@ -48,7 +51,7 @@ return "Economy bill: /n the price for "+days+" days is: "+price;}//end printbil
 
 class VIP extends Car {
 
-Driver d;
+Driver d;//object
 
 public VIP ( String plate, double price, String model, String color,Driver d){
 super ( plate, price, model, color); this.d=d; }//end cons
