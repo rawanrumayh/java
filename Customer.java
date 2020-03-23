@@ -3,16 +3,14 @@ public class Customer {
 int id;
 private String name;
 private Long phone;
-String Sara;
 
 
-public Customer( int , String , String, Long){
 
-}
+public Customer( int id , String name ,/* String,*/ Long phone){
+this.id =id; this.name= name; this.phone = phone;}
 
 public String toString(){
-hi sara
- hi rawan
+return "Customer id: "+id+"\t name: "+name+"\t phone number "+phone+"\n";
 }
 
 //setter and getter
@@ -37,7 +35,7 @@ public String toString(){
 
 class CarRental {
 
-protected numOfCars;
+protected int numOfCars;
 
 
 public CarRental( int size){ 
@@ -49,7 +47,7 @@ public void addCar(Car c ){
 }
 
 
-public saveToFile() {
+public void saveToFile() {
 
 }
 
