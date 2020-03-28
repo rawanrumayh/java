@@ -14,7 +14,7 @@ this .id=id;this.name=name;this.phone=phone;
 }
 
 public String toString(){
-return "the id >>"+id + "the name >> \t"+ name +" the phone >> \t"+phone;
+return "the customer id >>"+id + "the customer name >> \t"+ name +" the customer phone >> \t"+phone;
 }
 
 
@@ -44,15 +44,17 @@ class Driver {
 
 private int id;
 private String name;
+
+
 public Driver(int id, String name){
- this.id=id;
-    this.name=name;
+this.id=id;
+this.name=name;
 }
 
 
 public String toString(){
 
- return "the id is >> "+id  +"the name is >> " +name;
+ return "the Driver id is >> "+id  +"the Driver name is >> " +name;
 }
 
 }//end class driver 
@@ -71,10 +73,10 @@ numOfCars=0;
 
 public void addCar(Car c ){
 if(numOfCars<carlist.length){
-carlist[numOfCars++]=c
-System.out.println("Add ");}
+carlist[numOfCars++]= c;
+System.out.println("Added successfully ");}
 else
-Syastem.out.println("not Add");
+Syastem.out.println("adding failed");
 
 }
 
