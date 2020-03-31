@@ -92,6 +92,10 @@ System.out.println("adding failed");
 
 
 public  void  saveToFile() {
+try{
+File out =new  File ("cars.dat");
+FileOutputStream  f=new FileOutputStream(out);
+objectOutputStream os=new objectOutputStream(f);
 
 }
 
