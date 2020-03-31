@@ -1,5 +1,8 @@
-import java .util.*;
+import java.util.*;
 import  java.io.*; 
+import javax.swing.JOptionPane;
+
+
 
 interface Payabel{
 
@@ -39,7 +42,6 @@ return phone;}
 }//end customer class
 
 
-import java.io.Serializable;
 class Driver implements Serializable {
 
 private int id;
@@ -59,8 +61,8 @@ this.id=id;}
 public String getName(){
 return name;
 }
-public setName(){
-this.name=name;  
+public void setName(){
+this.name=name;  }
 public String toString(){
 
  return "the Driver id is >> "+id  +"the Driver name is >> " +name;}
@@ -95,7 +97,7 @@ public  void  saveToFile() {
 try{
 File out =new  File ("cars.dat");
 FileOutputStream  f=new FileOutputStream(out);
-objectOutputStream os=new objectOutputStream(f);
+ObjectOutputStream os=new ObjectOutputStream(f);} catch(IOException e){System.out.println(e);}
 
 }
 
@@ -175,13 +177,13 @@ plateNo = plate; pricePerDay = rice; this.model = model; this.color = color;
 this.available=true;
 } //end const
 public Customer getCustomer(){
-return cr}
+return cr;}
 public void setCustomer(Customer c ){
 this.cr = c;
 } //end setcustomer
 
 public String toString(){ 
-return "Plate number: "+plateNo+"\t price per day: "+pricePerDay+"\t model: "+model+"\t color: "+color+   "\t available : "+available "\t Customer :"+cr.toString()+ " \n"; }
+return "Plate number: "+plateNo+"\t price per day: "+pricePerDay+"\t model: "+model+"\t color: "+color+"\t available : "+available +"\t Customer :"+cr.toString()+ " \n"; }
 
 public boolean getAvailability () { return available;}
 
@@ -193,8 +195,6 @@ public String getPlateNo() { return plateNo; }
 //setters getters
 }//end class car
 
-import java .io.*;
-import javax.swing.JOptionPane;
 class Economy extends Car {
 
 public Economy ( String plate, double price, String model, String color){
@@ -244,7 +244,7 @@ price =super. pricePerDay * days+(10*days);
 String s="VIP bill: \n"+super.toString()+"\n";
 s=s+"Driver :"+d.toString()+"\n";
 s=s+"the price:"+price+"\n";
-String FileName=getCustomer.getName()+"_"+getCustomer.getId()+".text";
+String FileName= getCustomer.getName()+"_"+getCustomer.getId()+".text";
 try{
 
 //open file text
