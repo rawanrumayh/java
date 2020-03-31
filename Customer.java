@@ -39,8 +39,8 @@ return phone;}
 }//end customer class
 
 
-
-class Driver {
+import java.io.Serializable;
+class Driver implements Serializable {
 
 private int id;
 private String name;
@@ -51,6 +51,16 @@ this.id=id;
 this.name=name;}
 
 
+public int getId(){
+return id;}
+
+public void setId(){
+this.id=id;}
+public String getName(){
+return name;
+}
+public setName(){
+this.name=name;  
 public String toString(){
 
  return "the Driver id is >> "+id  +"the Driver name is >> " +name;}
@@ -145,7 +155,7 @@ return null;  }
 }// end CarRental class 
 
 
-abstract class Car implements Payabel //carlist in all sub classes and here + relation between customer class
+abstract class Car implements Payabel,Serializable //carlist in all sub classes and here + relation between customer class
 {
 
 protected String plateNo;
@@ -153,19 +163,21 @@ protected double pricePerDay;
 protected String model;
 protected String color;
 protected boolean available;
-protected Customer customer;
+protected Customer cr;
 //  *object coustmer in car class
 
 public Car ( String plate, double rice, String model, String color) {
 plateNo = plate; pricePerDay = rice; this.model = model; this.color = color; 
+this.available=true;
 } //end const
-
+public Customer getCustomer(){
+return cr}
 public void setCustomer(Customer c ){
-customer = c;
+this.cr = c;
 } //end setcustomer
 
 public String toString(){ 
-return "Plate number: "+plateNo+"\t price per day: "+pricePerDay+"\t model: "+model+"\t color: "+color+"\n"; }
+return "Plate number: "+plateNo+"\t price per day: "+pricePerDay+"\t model: "+model+"\t color: "+color+   "\t available : "+available "\t Customer :"+cr.toString()+ " \n"; }
 
 public boolean getAvailability () { return available;}
 
@@ -177,7 +189,8 @@ public String getPlateNo() { return plateNo; }
 //setters getters
 }//end class car
 
-
+import java .io.*;
+import javax.swing.JOptionPane;
 class Economy extends Car {
 
 public Economy ( String plate, double price, String model, String color){
@@ -186,12 +199,30 @@ super ( plate, price, model, color);}//end cons
 
 public String printBill(int days){
 double price =0;
-price = pricePerDay * days;
+price = super.pricePerDay * days;
 
 if (days>7)
 price = price - (price*0.2);
 
-return "Economy bill: /n the price for "+days+" days is: "+price;}//end printbill
+
+String s="Economy bill: \n"+super.toString()+"\n";
+s=s+"the price  :\n"+price+"\n";
+
+//file
+String fileName=getCustomer.getName()+"_"+getCustomer.getId()+".text";
+try{
+//open text file
+File OUTF=new File (fileName);
+FileOutputStream SF=new FileOutputStream(OUTF);
+PrintWriter PW=new PrintWriter(SF);
+PW.println(s);
+PW.close();}
+
+catch(IOException E){
+JOptionPane.showMessageDialog(null,"Error economy file ");}//text
+
+return s;
+}//end printbill
 }//end economy class
 
 
@@ -205,9 +236,11 @@ super ( plate, price, model, color); this.d=d; }//end cons
 
 public String printBill(int days){
 double price =0;
-price = pricePerDay * days+(10*days);
-
-return "VIP bill: /n the price for "+days+" days is: "+price;}//end printbill
+price =super. pricePerDay * days+(10*days);
+String s="VIP bill: \n"+super.toString()+"\n";
+s=s+"Driver :"+d.toString()+"\n";
+s=s+"the price:"+price+"\n";
+}//end printbill
 }//end VIP class
 
 
