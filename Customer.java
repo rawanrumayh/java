@@ -107,19 +107,43 @@ public  void loadFromFile(){
 }
 
 
-public void rentCar( String plateNo,Customer c, int numOfDay){ // not sure
-for (int i=0; i<numOfCars; i++)
-if ( carlist[i].getPlateNo().equals(plateNo) ){
-carlist[i].setAvailability(false);
-carlist[i].setCustomer(c);
-System.out.println(carlist[i].printBill(numOfDay));}
+public void rentCar( String plateNo,Customer c, int numOfDay){
+Car car=this.getCar(plateNo);
+if(car==null){
+JoptionPane.showMessageDialog(null,"plateNo not found");
+return;
+}//if 1
 
-}// end rent car
+if(car.isAvailable()==true){
+car.printBill(numOfDay);
+car.setCustomer(c);
+car.setAvailable(false);
+JoptionPane.showMessageDialog(false,"rent car successfully");
+String str=car.printBill(numOfDay);
+JoptionPane.showMessageDialog(null,str);
+
+return;}//if2
+
+else{
+JoptionPane.showMessageDialog(null,"this car not Availeble");
+return;}//else
+}//end RentCar
+
 
 public void  returnCar( String plateNo) {
-for (int i=0; i<numOfCars; i++)
-if ( carlist[i].getPlateNo().equals(plateNo) ) 
-carlist[i].setAvailability(true);
+Car car=this.getCar(plateNo);
+if(car==null){
+JoptionPane.showMessageDialog(null,"this plateNo not Found");
+return;}//if1
+
+if(car.isAvailable()==false){
+car.setCustomer(null);
+car.setAvailable(true);
+JoptionPane.showMessageDialog(null,"return Car is successfuly");
+return;}//if2
+else
+JoptionPane.showMessageDialog(null,"this Car Available");
+return;
 }
 
 
