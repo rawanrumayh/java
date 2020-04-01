@@ -17,67 +17,146 @@ class GUI extends JFrame implements ActionListener {
 
 public GUI (){
 
-setSize(1000,700);
+setSize(1000,800);
 setTitle("Rental System");
 setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
-JButton AddCar, ShowAllEco, ShowAllVIP, Rent, ReturnCar;
-AddCar     = new JButton("Add new Car"); AddCar.setBounds(100,360,150,30);
-ShowAllEco = new JButton("Show all available Economy cars"); ShowAllEco.setBounds(400,300,250,30);
-ShowAllVIP = new JButton("Show all available VIP cars"); ShowAllVIP.setBounds(200,400,250,30);
-Rent       = new JButton("Rent Car"); Rent.setBounds(250,500,100,30);
-ReturnCar  = new JButton("Return Car"); ReturnCar.setBounds(300,600,100,30);
+JButton AddCar, ShowAllEco, ShowAllVIP, Rent;
 
-Container contentPane = getContentPane(); contentPane.setLayout(null);
-contentPane.add(AddCar); contentPane.add(ShowAllEco); contentPane.add(ShowAllVIP); contentPane.add(Rent); contentPane.add(ReturnCar);
-AddCar.addActionListener(this); ShowAllEco.addActionListener(this); ShowAllVIP.addActionListener(this); Rent.addActionListener(this); ReturnCar.addActionListener(this);
+Container contentPane = getContentPane(); contentPane.setLayout(null); 
 
 
-JLabel image = new JLabel (new ImageIcon ("rsz_4logo.png"));
-image.setSize(225,98);
-image.setLocation(400,10);
+JLabel image = new JLabel (new ImageIcon ("logo1.png"));
+image.setSize(256,80);
+image.setLocation(10,0); 
 contentPane.add(image);
 
-JPanel j = new JPanel();
-j.setSize(300,300); j.setLocation(20,100); j.setBorder(BorderFactory.createTitledBorder("Add new car"));
-contentPane.add(j);
+// add new car panel
+
+JPanel addPanel = new JPanel();
+addPanel.setSize(350,300); addPanel.setLocation(20,100); addPanel.setBorder(BorderFactory.createTitledBorder("Add new car")); addPanel.setLayout(null);
+contentPane.add(addPanel);
+
+AddCar = new JButton("Add new Car"); AddCar.setBounds(115,270,130,20);
+addPanel.add(AddCar); 
+
+JLabel text = new JLabel ("plateNo : ");
+text.setSize(56,14); text.setLocation(10,30); addPanel.add(text); 
 
 
-JLabel text = new JLabel ("plateNO : ");
-text.setSize(0,0); text.setLocation(0,0); j.add(text); 
-
-
-JTextField input = new JTextField();
-input.setColumns(6);
-j.add(input); 
+JTextField input = new JTextField(); input.setSize(98,20); input.setLocation(100,30); 
+addPanel.add(input); 
 
 text = new JLabel ("pricePerDay : ");
-text.setSize(100,100); text.setLocation(100,100); j.add(text);
+text.setSize(80,50); text.setLocation(10,50); addPanel.add(text);
 
 
 input = new JTextField();
-input.setColumns(6);
-j.add(input);
+input.setSize(98,20); input.setLocation(100,65);
+addPanel.add(input);
 
 text = new JLabel ("model : ");
-text.setSize(0,0); text.setLocation(0,0); j.add(text); 
+text.setSize(80,50); text.setLocation(10,90); addPanel.add(text); 
 
 
 input = new JTextField();
-input.setColumns(6);
-j.add(input);
+input.setSize(98,20); input.setLocation(100,105);
+addPanel.add(input);
 
 text = new JLabel ("color :");
-text.setSize(0,0); text.setLocation(0,0); j.add(text); 
+text.setSize(80,50); text.setLocation(10,130); addPanel.add(text); 
 
 
 input = new JTextField();
-input.setColumns(6);
-j.add(input);
+input.setSize(98,20); input.setLocation(100,145);
+addPanel.add(input);
 
-JRadioButton Economy = new JRadioButton ("Economy"); Economy.setBounds(40,250,10,10);j.add(Economy);
-JRadioButton VIP = new JRadioButton ("VIP"); Economy.setBounds(40,270,10,10); j.add(VIP);
+JRadioButton Economy = new JRadioButton ("Economy"); Economy.setBounds(20,190,79,16); addPanel.add(Economy);
+JRadioButton VIP     = new JRadioButton ("VIP");         VIP.setBounds(20,210,44,12); addPanel.add(VIP);
+
+// driver panel
+
+JPanel driverPanel = new JPanel(); 
+driverPanel.setSize(160,85); driverPanel.setLocation(160,170); 
+driverPanel.setBorder(BorderFactory.createTitledBorder("driver")); 
+driverPanel.setLayout(null); addPanel.add(driverPanel);
+
+text = new JLabel ("id :"); 
+text.setSize(20,12); text.setLocation(10,30); driverPanel.add(text);
+input = new JTextField (); input.setSize(98,20); input.setLocation(55,30); driverPanel.add(input); 
+
+text = new JLabel ("name :"); 
+text.setSize(40,12); text.setLocation(10,53); driverPanel.add(text);
+input = new JTextField (); input.setSize(98,20); input.setLocation(55,53); driverPanel.add(input); 
+
+
+// show information panel
+
+JPanel ShowInfo = new JPanel ();
+ShowInfo.setSize(440,245); ShowInfo.setLocation(20,420); 
+ShowInfo.setBorder(BorderFactory.createTitledBorder("Show Information")); 
+ShowInfo.setLayout(null); contentPane.add(ShowInfo);
+
+ShowAllEco = new JButton("Show all available Economy cars"); ShowAllEco.setBounds(5,20,218,20);
+ShowAllVIP = new JButton("Show all available VIP cars"); ShowAllVIP.setBounds(235,20,200,20);
+ShowInfo.add(ShowAllEco); ShowInfo.add(ShowAllVIP); 
+
+JTextArea bill = new JTextArea (); bill.setSize(420,180); bill.setLocation(10,50); ShowInfo.add(bill);
+
+// rent car panel
+
+JPanel RentCar = new JPanel ();
+RentCar.setSize(340,300); RentCar.setLocation(500,100); 
+RentCar.setBorder(BorderFactory.createTitledBorder("Rent Car")); 
+RentCar.setLayout(null); contentPane.add(RentCar);
+
+JLabel text1 = new JLabel ("plateNo :");
+text1.setSize(56,14); text1.setLocation(15,30); RentCar.add(text1);
+input = new JTextField(); input.setSize(90,20); input.setLocation(100,30); RentCar.add(input);
+
+text = new JLabel ("No. of days :");
+text.setSize(70,14); text.setLocation(15,60); RentCar.add(text);
+input = new JTextField(); input.setSize(90,20); input.setLocation(100,60); RentCar.add(input);
+
+// customer information panel
+
+JPanel CustomerInfo = new JPanel ();
+CustomerInfo.setSize(300,150); CustomerInfo.setLocation(20,90); 
+CustomerInfo.setBorder(BorderFactory.createTitledBorder("Customer Information")); 
+CustomerInfo.setLayout(null); RentCar.add(CustomerInfo);
+
+text  = new JLabel ("id :");
+text.setSize(56,14); text.setLocation(15,30); CustomerInfo.add(text);
+input = new JTextField(); input.setSize(90,20); input.setLocation(80,30); CustomerInfo.add(input);
+
+text  = new JLabel ("name :");
+text.setSize(56,14); text.setLocation(15,60); CustomerInfo.add(text);
+input = new JTextField(); input.setSize(90,20); input.setLocation(80,60); CustomerInfo.add(input);
+
+text  = new JLabel ("phone :");
+text.setSize(56,14); text.setLocation(15,90); CustomerInfo.add(text);
+input = new JTextField(); input.setSize(90,20); input.setLocation(80,90); CustomerInfo.add(input);
+
+Rent  = new JButton("Rent Car"); Rent.setBounds(120,260,100,20);
+RentCar.add(Rent); 
+
+
+//Return car panel
+
+JPanel ReturnCar = new JPanel ();
+ReturnCar.setSize(400,130); ReturnCar.setLocation(500,500); 
+ReturnCar.setBorder(BorderFactory.createTitledBorder("Renturn Car")); 
+ReturnCar.setLayout(null); contentPane.add(ReturnCar);
+
+text  = new JLabel ("plateNo :");
+text.setSize(56,14); text.setLocation(15,30); ReturnCar.add(text);
+input = new JTextField(); input.setSize(90,20); input.setLocation(80,30); ReturnCar.add(input);
+
+JButton Return = new JButton("Return Car"); Return.setBounds(120,100,100,20); ReturnCar.add(Return);
+
+
+
 
 
 
