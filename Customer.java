@@ -84,12 +84,23 @@ carlist = new Car [size];
 }
 
 public void addCar(Car c ){
-if(numOfCars<carlist.length){
-carlist[numOfCars++]= c;
-System.out.println("Added successfully ");}
-else
-System.out.println("adding failed");
+if( numOfCars >= carlist.length )
+{
+JOptionPane.showMessageDialog(null ,"can't add more cars");
+return;
+}
+// sarch  id first
+for( int i =0 ; i < numOfCars ; i++ )
+if( carlist[i].getPlateNo().equals(c.getPlateNo()))
+{
+JOptionPane.showMessageDialog(null ,"sorry  cant add this car , this plate number is Exist");
+return ; 
+}
 
+carlist[numOfCars++] = c ; 
+String type = c.getClass().getSimpleName() ;
+
+JOptionPane.showMessageDialog(null ,"Add new " +"("+ type +")"+ " Car to system <successfully>");
 }
 
 
