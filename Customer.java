@@ -103,6 +103,40 @@ ObjectOutputStream os=new ObjectOutputStream(f);} catch(IOException e){System.ou
 
 
 public  void loadFromFile(){
+ObjectInputStream file = null;
+try{
+File F = new File("cars.dat") ; 
+FileInputStream fi = new FileInputStream(F);
+file= new ObjectInputStream( fi);
+
+while( true )
+{
+Car c = (Car) file.readObject() ; //object
+//addCar( c ) ; 
+if( numOfCars >= carlist.length )
+ break;  
+carlist[numOfCars++] = c ; 
+}
+
+}
+catch(EOFException e)
+{
+
+}
+catch(ClassNotFoundException e1 )
+{
+JOptionPane.showMessageDialog(null , "Error  Reading car from file ");  
+
+}
+catch(IOException ex  )
+{
+JOptionPane.showMessageDialog(null , "Error file in carRental");  
+}
+
+try{  if( file!= null )
+ file.close();//clse } 
+catch(IOException ex ){ } 
+}// end load 
 
 }
 
