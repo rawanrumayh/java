@@ -2,6 +2,7 @@ import java.util.*;
 import  java.io.*; 
 import javax.swing.JOptionPane;
 
+import java.io.Serializable;
 
 
 interface Payabel{
@@ -9,7 +10,7 @@ interface Payabel{
 public String printBill(int days);
 }//end payable
 
-public class Customer {
+public class Customer implements Serializable  {
 
 int id;
 private String name;
@@ -36,6 +37,16 @@ return name;}
 public Long getPhone(){
 return phone;}
 
+ public void setPhone(long phone) {
+        this.phone = phone;
+}
+  public void setName(String name) {
+        this.name = name;
+}
+
+public void setId(int id) {
+        this.id = id;
+}
 
 //setter and getter
 
@@ -108,7 +119,21 @@ public  void  saveToFile() {
 try{
 File out =new  File ("cars.dat");
 FileOutputStream  f=new FileOutputStream(out);
-ObjectOutputStream os=new ObjectOutputStream(f);} catch(IOException e){System.out.println(e);}
+
+for( int i = 0 ;i < this.numOfCars ; i++ )
+os.writeObject(carlist[i]);
+
+os.close();
+
+JOptionPane.showMessageDialog(null , "Thank you for using <<CAR RENTAL SYSTEM >>, All changes is saved<>. ");  //show
+
+
+ObjectOutputStream oss=new ObjectOutputStream(f);} catch(IOException e){JOptionPane.showMessageDialog(null , "Error in saving this file ");  }
+
+
+//try
+
+
 
 }
 
@@ -330,5 +355,6 @@ return s;
 
 }//end printbill
 }//end VIP class
+
 
 
