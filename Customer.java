@@ -230,7 +230,7 @@ return null;  }
 }// end CarRental class 
 
 
-abstract class Car implements Payabel,Serializable //carlist in all sub classes and here + relation between customer class
+abstract class Car implements Payabel,Serializable 
 {
 
 protected String plateNo;
@@ -239,7 +239,6 @@ protected String model;
 protected String color;
 protected boolean available;
 protected Customer cr;
-//  *object coustmer in car class
 
 public Car ( String plate, double rice, String model, String color) {
 plateNo = plate; pricePerDay = rice; this.model = model; this.color = color; 
