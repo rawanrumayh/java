@@ -169,6 +169,8 @@ JButton Return = new JButton("Return Car"); Return.setBounds(120,100,100,20); Re
 
 public void actionPerformed (ActionEvent event) {
 if (event.getSource() instanceof JButton){
+switch (((JButton)(event.getSource()))).getText()){
+case "AddCar": System.out.println("aa");break;}
 
 String buttonText =( (JButton)(event.getSource()) ).getText();
 setTitle("You clicked "+buttonText);}
