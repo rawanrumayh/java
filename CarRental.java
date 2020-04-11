@@ -27,9 +27,12 @@ if( carlist[i].getPlateNo().equals(c.getPlateNo()))
 JOptionPane.showMessageDialog(null ,"sorry  couldn't add this car , the plate number is already Exist");
 return ; 
 }
+String type = c.getClass().getName() ;
+if ( c instanceof Economy){
+carlist[numOfCars++] = (Economy)c ;}
 
-carlist[numOfCars++] = c ; // i guess we should check if instance of economy or vip
-String type = c.getClass().getSimpleName() ;
+if ( c instanceof VIP){
+carlist[numOfCars++] = (VIP)c ;}
 
 JOptionPane.showMessageDialog(null ,"an "+ type+ " Car added to the system successfully");
 }
@@ -46,7 +49,7 @@ os.writeObject(carlist[i]);
 
 os.close();
 
-JOptionPane.showMessageDialog(null , "Thank you for using <<CAR RENTAL SYSTEM >>, All changes is saved<>. ");  //show
+JOptionPane.showMessageDialog(null , "Thank you for using <<CAR RENTAL SYSTEM >>, All changes is saved. ");  //show
 
 
 ObjectOutputStream oss=new ObjectOutputStream(f);} catch(IOException e){JOptionPane.showMessageDialog(null , "Error in saving this file ");  }
@@ -62,7 +65,8 @@ ObjectOutputStream oss=new ObjectOutputStream(f);} catch(IOException e){JOptionP
 public  void loadFromFile(){
 ObjectInputStream file = null;
 try{
-File F = new File("cars.dat") ; 
+File F = new File("cars.dat") ;
+if (F.length()==0) return; 
 FileInputStream fi = new FileInputStream(F);
 file= new ObjectInputStream( fi);
 
@@ -103,12 +107,11 @@ Car car=this.getCar(plateNo);
 if (car == null)
 JOptionPane.showMessageDialog(null,"plateNo is not found");
 
-else if(car.available){
-car.printBill(numOfDay);
+else if(car.available){ 
 car.setCustomer(c);
+String str=car.printBill(numOfDay);
 car.setAvailability(false);
 JOptionPane.showMessageDialog(null," car is rented successfully");
-String str=car.printBill(numOfDay);
 JOptionPane.showMessageDialog(null,str);
 }//if2
 
@@ -153,7 +156,6 @@ return AvailableVIP;} //end searchvip
 public Economy[] searchAvailableEconomy() {
 Economy [] AvailableEco = new Economy [numOfCars];
 int count =0;
-
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i] instanceof Economy ) {
 if ( carlist[i].getAvailability() )

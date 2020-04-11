@@ -9,7 +9,7 @@ super ( plate, price, model, color);}//end cons
 
 public String printBill(int days){
 double price =0;
-price = super.pricePerDay * days;
+price = pricePerDay * days;
 
 if (days>7)
 price = price - (price*0.2);

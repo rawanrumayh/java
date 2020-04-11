@@ -21,8 +21,9 @@ return name;
 }
 public void setName(){
 this.name=name;  }
+
 public String toString(){
 
- return "the Driver id is >> "+id  +"the Driver name is >> " +name;}
+ return "Driver information \n id: "+id  +"\n name: " +name+"\n";}
 
 }//end class driver 

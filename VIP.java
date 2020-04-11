@@ -11,10 +11,12 @@ super ( plate, price, model, color); this.d=d; }//end cons
 
 public String printBill(int days){
 double price =0;
-price =super. pricePerDay * days+(10*days);
-String s="VIP bill: \n"+super.toString()+"\n";
+price = pricePerDay * days+(100*days);
+
+String s="VIP bill: \n \n"+super.toString()+"\n";
 s=s+"Driver :"+d.toString()+"\n";
 s=s+"the price:"+price+"\n";
+
 String FileName= getCustomer().getName()+"_"+getCustomer().getId()+".text";
 try{
 
@@ -32,4 +34,6 @@ JOptionPane.showMessageDialog(null,"Error ViP file ");}//text
 return s;
 
 }//end printbill
+
+public String toString () { return super.toString()+"\n"+d.toString();}
 }//end VIP class

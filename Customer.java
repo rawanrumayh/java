@@ -13,7 +13,7 @@ public Customer( int id , String  name , Long  phone){
 this .id=id;this.name=name;this.phone=phone;}
 
 public String toString(){
-return "the customer id >>"+id + "the customer name >> \t"+ name +" the customer phone >> \t"+phone;}
+return "\n Customer information:\n id: "+id + "\n name "+ name +" \n phone: "+phone+"\n";}
 
 
 public int getId(){

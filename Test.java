@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
+
 public class Test{
 
 public static void main (String[]args) {
@@ -13,6 +15,7 @@ frame.setVisible(true);
 
 
 class GUI extends JFrame implements ActionListener {
+CarRental list = new CarRental (100);
 JTextField addCarPlateNo; JTextField addCarPrice; JTextField addCarmodel; 
 JTextField addCarcolor; JRadioButton EconomySelection; JRadioButton VIPSelection;  
 JTextField DriverID; JTextField DriverName; 
@@ -22,9 +25,10 @@ JTextField CustomerName; JTextField CustomerPhone; JTextField ReturnCarPlateNo; 
 
 public GUI (){
 
+list.loadFromFile();
 setSize(1000,800);
 setTitle("Rental System");
-setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 
 
 JButton AddCar, ShowAllEco, ShowAllVIP, Rent;
@@ -95,7 +99,7 @@ DriverID = new JTextField (); DriverID.setSize(98,20); DriverID.setLocation(55,3
 text = new JLabel ("name :"); 
 text.setSize(40,12); text.setLocation(10,53); driverPanel.add(text);
 DriverName = new JTextField (); DriverName.setSize(98,20); DriverName.setLocation(55,53); driverPanel.add(DriverName); DriverName.addActionListener(this);
-DriverName.setEnabled(false);  DriverID.setEnabled(false);
+
 
 
 
@@ -165,8 +169,16 @@ ReturnCarPlateNo = new JTextField(); ReturnCarPlateNo.setSize(90,20); ReturnCarP
 
 JButton Return = new JButton("Return Car"); Return.setBounds(120,100,100,20); ReturnCar.add(Return); Return.addActionListener(this);
 
-
-
+setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//////
+addWindowListener(new java.awt.event.WindowAdapter() {
+public void windowClosing(java.awt.event.WindowEvent e) {
+int PromptResult = JOptionPane.showConfirmDialog(null,"Do you want to save your changes?","n",JOptionPane.YES_NO_CANCEL_OPTION);
+if(PromptResult==JOptionPane.YES_OPTION){
+list.saveToFile();
+ System.exit(0); }
+ if(PromptResult==JOptionPane.NO_OPTION)
+ System.exit(0); 
+   }});
 
 
 
@@ -178,10 +190,10 @@ JButton Return = new JButton("Return Car"); Return.setBounds(120,100,100,20); Re
 
 
 public void actionPerformed (ActionEvent event) {
+try{
 if (event.getSource() instanceof JButton){
 
 String text= ((JButton)(event.getSource())).getText();
-CarRental list = new CarRental (100);
 switch (text){
 case "Add new Car": 
 String plateNo = addCarPlateNo.getText();
@@ -191,6 +203,7 @@ String color = addCarcolor.getText();
 
 
 if ( EconomySelection.isSelected() ){
+DriverName.setEnabled(false);  DriverID.setEnabled(false);
 Economy a = new Economy ( plateNo, price, model, color );
 list.addCar(a);
 }
@@ -202,15 +215,25 @@ Driver driver = new Driver (Integer.parseInt(DriverID.getText()) ,DriverName.get
 VIP a = new VIP ( plateNo, price, model, color,driver );
 list.addCar(a);
 }
+
+addCarPlateNo.setText("");
+addCarPrice.setText("");
+addCarmodel.setText("");
+addCarcolor.setText("");
+DriverID.setText("");
+DriverName.setText("");
+
 break;
 
 case "Show all available Economy cars": 
 Car [] Ecolist = list.searchAvailableEconomy();
+if (Ecolist !=null){ 
 String s="";
-for (int i=0; i<Ecolist.length; i++){
+for (int i=0; i<Ecolist.length; i++)
 if (Ecolist[i] != null )
-s+=Ecolist[i];}
-bill.setText(s);
+s+=Ecolist[i];
+else continue;
+bill.setText(s);} bill.setText("there's no available cars");
 
 break; 
 
@@ -228,17 +251,33 @@ String PlateNo = rentCarPlateNo.getText();
 int days = Integer.parseInt(RentCarNumOfDays.getText());
 Customer c = new Customer ( Integer.parseInt(CustomerID.getText()), CustomerName.getText(), Long.parseLong(CustomerPhone.getText()));
 list.rentCar(PlateNo, c, days);
+rentCarPlateNo.setText("");
+RentCarNumOfDays.setText("");
+CustomerID.setText("");
+CustomerName.setText("");
+CustomerPhone.setText("");
+
 break;
 
 case "Return Car":
 list.returnCar(ReturnCarPlateNo.getText());
-break;
+ReturnCarPlateNo.setText("");
+break; }// end switch
 
- }// end switch
+}// end if instance of jbutton
 
-}
-
+if (event.getSource() instanceof JRadioButton)
+if ( EconomySelection.isSelected() ){
+DriverName.setEnabled(false); DriverID.setEnabled(false);}
+else if ( VIPSelection.isSelected() ){
+DriverName.setEnabled(true); DriverID.setEnabled(true);} } catch(NumberFormatException e) {JOptionPane.showMessageDialog(null,"invalid input");}
 }//end action method
+
+
+
+
+
+
 
 
 }// end class
