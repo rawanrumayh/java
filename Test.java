@@ -36,17 +36,26 @@ JButton AddCar, ShowAllEco, ShowAllVIP, Rent;
 Container contentPane = getContentPane(); contentPane.setLayout(null); 
 
 
-JLabel image = new JLabel (new ImageIcon ("logo1.png"));
-image.setSize(256,80);
-image.setLocation(10,0); 
+JLabel image = new JLabel (new ImageIcon ("ww.png"));
+image.setSize(450,700);
+image.setLocation(480,280); 
 contentPane.add(image);
+
+
+//JLabel title = new JLabel ("Car Rental System"); title.setSize(150,80); contentPane.add(title); title.setLocation(260,35);
 
 
 // add new car panel
 
 JPanel addPanel = new JPanel();
-addPanel.setSize(350,300); addPanel.setLocation(20,100); addPanel.setBorder(BorderFactory.createTitledBorder("Add new car")); addPanel.setLayout(null);
+addPanel.setSize(450,300); addPanel.setLocation(20,50); addPanel.setBorder(BorderFactory.createTitledBorder("Add new car")); addPanel.setLayout(null);
 contentPane.add(addPanel);
+
+
+JLabel imageadd = new JLabel (new ImageIcon ("1.png"));
+imageadd.setSize(200,200);
+imageadd.setLocation(220,0); 
+addPanel.add(imageadd);
 
 AddCar = new JButton("Add new Car"); AddCar.setBounds(115,270,130,20);
 addPanel.add(AddCar); AddCar.addActionListener(this);
@@ -106,7 +115,7 @@ DriverName = new JTextField (); DriverName.setSize(98,20); DriverName.setLocatio
 // show information panel
 
 JPanel ShowInfo = new JPanel ();
-ShowInfo.setSize(440,245); ShowInfo.setLocation(20,420); 
+ShowInfo.setSize(450,300); ShowInfo.setLocation(20,380); 
 ShowInfo.setBorder(BorderFactory.createTitledBorder("Show Information")); 
 ShowInfo.setLayout(null); contentPane.add(ShowInfo);
 
@@ -121,7 +130,7 @@ bill = new JTextArea (); bill.setSize(420,180); bill.setLocation(10,50); ShowInf
 // rent car panel
 
 JPanel RentCar = new JPanel ();
-RentCar.setSize(340,300); RentCar.setLocation(500,100); 
+RentCar.setSize(400,300); RentCar.setLocation(500,50); 
 RentCar.setBorder(BorderFactory.createTitledBorder("Rent Car")); 
 RentCar.setLayout(null); contentPane.add(RentCar);
 
@@ -159,7 +168,7 @@ RentCar.add(Rent);  Rent.addActionListener(this);
 //Return car panel
 
 JPanel ReturnCar = new JPanel ();
-ReturnCar.setSize(400,130); ReturnCar.setLocation(500,500); 
+ReturnCar.setSize(400,130); ReturnCar.setLocation(500,380); 
 ReturnCar.setBorder(BorderFactory.createTitledBorder("Renturn Car")); 
 ReturnCar.setLayout(null); contentPane.add(ReturnCar);
 
@@ -169,10 +178,11 @@ ReturnCarPlateNo = new JTextField(); ReturnCarPlateNo.setSize(90,20); ReturnCarP
 
 JButton Return = new JButton("Return Car"); Return.setBounds(120,100,100,20); ReturnCar.add(Return); Return.addActionListener(this);
 
+
 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//////
 addWindowListener(new java.awt.event.WindowAdapter() {
 public void windowClosing(java.awt.event.WindowEvent e) {
-int PromptResult = JOptionPane.showConfirmDialog(null,"Do you want to save your changes?","n",JOptionPane.YES_NO_CANCEL_OPTION);
+int PromptResult = JOptionPane.showConfirmDialog(null,"Do you want to save your changes?","before closing",JOptionPane.YES_NO_CANCEL_OPTION);
 if(PromptResult==JOptionPane.YES_OPTION){
 list.saveToFile();
  System.exit(0); }

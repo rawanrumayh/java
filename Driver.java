@@ -24,6 +24,6 @@ this.name=name;  }
 
 public String toString(){
 
- return "Driver information \n id: "+id  +"\n name: " +name+"\n";}
+ return "Driver information \n id: "+id  +"\t \t name: " +name+"\n";}
 
 }//end class driver 

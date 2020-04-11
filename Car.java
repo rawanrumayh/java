@@ -27,7 +27,7 @@ this.cr = c;
 } //end setcustomer
 
 public String toString(){ 
-return "Car information:\n Plate number: "+plateNo+"\t \t price per day: "+pricePerDay+"\n model: "+model+"\t \t color: "+color+"\n available : "+available +"\n"+cr.toString(); }
+return "Car information:\n Plate number: "+plateNo+"\t \t price per day: "+pricePerDay+"\t \t model: "+model+"\t \t color: "+color+"\t \t available : "+available +"\n"+cr.toString(); }
 
 public boolean getAvailability () { return available;}
 
