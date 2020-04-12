@@ -254,11 +254,12 @@ break;
 
 case "Show all available VIP cars":
 Car [] VIPlist = list.searchAvailableVIP();
+if (VIPlist !=null){ 
 String w="";
 for (int i=0; i<VIPlist.length; i++){
 if (VIPlist[i] != null )
 w+=VIPlist[i];}
-bill.setText(w);
+bill.setText(w);} bill.setText("there's no available cars");
 break; 
 
 case "Rent Car":

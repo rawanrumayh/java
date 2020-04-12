@@ -67,10 +67,16 @@ public String getPlateNo() {
     public void setAvailable(boolean available) {
         this.available = available;
     }//
+    
+        public boolean getAvailability() {
+        return available;
+    }//
+
 
    
+   
 public String toString(){ 
-String St= "Car information:\n Plate number: "+plateNo+"\t \t price per day: "+pricePerDay+"\t \t model: "+model+"\t \t color: "+color+"\t \t available : "+available +"\n"+cr.toString(); 
+String St= "Car information:\n Plate number: "+plateNo+"\t \t price per day: "+pricePerDay+"\t \t model: "+model+"\t \t color: "+color+"\t \t available : "+available +"\n"; 
  if( cr != null )//coustmer
              St = St +  " Customer : " + cr.toString() + "\n";
         

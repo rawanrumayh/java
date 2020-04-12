@@ -14,7 +14,7 @@ double price =0;
 price = pricePerDay * days+(100*days);
 
 String s="VIP bill: \n \n"+super.toString()+"\n";
-s=s+"Driver :"+d.toString()+"\n";
+s=s+"Driver :"+d.toString()+"\n"+cr.toString()+"\n";
 s=s+"the price:"+price+"\n";
 
 String FileName= getCustomer().getName()+"_"+getCustomer().getId()+".text";
