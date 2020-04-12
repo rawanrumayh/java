@@ -241,19 +241,19 @@ DriverName.setText("");
 break;
 
 case "Show all available Economy cars": 
-Car [] Ecolist = list.searchAvailableEconomy();
+Economy [] Ecolist = list.searchAvailableEconomy();
 if (Ecolist !=null){ 
 String s="";
 for (int i=0; i<Ecolist.length; i++)
 if (Ecolist[i] != null )
 s+=Ecolist[i];
-else continue;
+
 bill.setText(s);} bill.setText("there's no available cars");
 
 break; 
 
 case "Show all available VIP cars":
-Car [] VIPlist = list.searchAvailableVIP();
+VIP [] VIPlist = list.searchAvailableVIP();
 if (VIPlist !=null){ 
 String w="";
 for (int i=0; i<VIPlist.length; i++){

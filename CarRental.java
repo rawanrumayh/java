@@ -24,17 +24,18 @@ return;
 for( int i =0 ; i < numOfCars ; i++ )
 if( carlist[i].getPlateNo().equals(c.getPlateNo()))
 {
-JOptionPane.showMessageDialog(null ,"sorry  couldn't add this car , the plate number is already Exist");
-return ; 
-}
-String type = c.getClass().getName() ;
+JOptionPane.showMessageDialog(null ,"sorry couldn't add this car , the plate number is already Exist");
+return ; } else continue;
+
 if ( c instanceof Economy){
-carlist[numOfCars++] = (Economy)c ;}
+carlist[numOfCars++] = (Economy)c ;
+JOptionPane.showMessageDialog(null ,"an Economy Car added to the system successfully");}
 
-if ( c instanceof VIP){
-carlist[numOfCars++] = (VIP)c ;}
+else if ( c instanceof VIP){
+carlist[numOfCars++] = (VIP)c ;
+JOptionPane.showMessageDialog(null ,"an VIP Car added to the system successfully");}
 
-JOptionPane.showMessageDialog(null ,"an "+ type+ " Car added to the system successfully");
+
 }
 
 
@@ -144,12 +145,11 @@ return;
 public VIP[] searchAvailableVIP(){
 VIP [] AvailableVIP = new VIP [numOfCars];
 int count =0;
-for (int i=0; i<numOfCars; i++)
+for (int i=0; i<numOfCars; i++){
 if ( carlist[i] instanceof VIP ) {
 if ( carlist[i].getAvailability()==true )
-AvailableVIP [count++] = (VIP)(carlist[i]); }
-if(count==0)
-return null;
+AvailableVIP [count++] = ((VIP)(carlist[i])); }}
+
 return AvailableVIP;} //end searchvip
 
 //

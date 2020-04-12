@@ -64,7 +64,7 @@ public String getPlateNo() {
         return available;
     }//
 
-    public void setAvailable(boolean available) {
+    public void setAvailability(boolean available) {
         this.available = available;
     }//
     
@@ -77,9 +77,7 @@ public String getPlateNo() {
    
 public String toString(){ 
 String St= "Car information:\n Plate number: "+plateNo+"\t \t price per day: "+pricePerDay+"\t \t model: "+model+"\t \t color: "+color+"\t \t available : "+available +"\n"; 
- if( cr != null )//coustmer
-             St = St +  " Customer : " + cr.toString() + "\n";
-        
+       
         return St ; }
 
 //setters getters
