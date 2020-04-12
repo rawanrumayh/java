@@ -146,9 +146,10 @@ VIP [] AvailableVIP = new VIP [numOfCars];
 int count =0;
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i] instanceof VIP ) {
-if ( carlist[i].getAvailability() )
+if ( carlist[i].getAvailability()==true )
 AvailableVIP [count++] = (VIP)(carlist[i]); }
-
+if(count==0)
+return null;
 return AvailableVIP;} //end searchvip
 
 //
@@ -158,9 +159,10 @@ Economy [] AvailableEco = new Economy [numOfCars];
 int count =0;
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i] instanceof Economy ) {
-if ( carlist[i].getAvailability() )
+if ( carlist[i].getAvailability() ==true)
 AvailableEco [count++] = (Economy)(carlist[i]); }
-
+if(count==0)
+return null;
 return AvailableEco;} // end searcheco
 
 
