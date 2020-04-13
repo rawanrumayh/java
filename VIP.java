@@ -1,4 +1,4 @@
-import java.util.*;
+//import java.util.*;
 import  java.io.*; 
 import javax.swing.JOptionPane;
 public class VIP extends Car {
@@ -14,12 +14,11 @@ double price =0;
 price = pricePerDay * days+(100*days);
 
 String s="VIP bill: \n \n"+super.toString()+"\n";
-s=s+"Driver :"+d.toString()+"\n Customer : " + cr.toString() + "\n";
+s=s+d.toString()+"\n";
 s=s+"the price:"+price+"\n";
 
-String FileName= getCustomer().getName()+"_"+getCustomer().getId()+".text";
 try{
-
+String FileName= getCustomer().getName()+"_"+getCustomer().getId()+".text";
 //open file text
 
 File OUTF=new File (FileName);
@@ -29,11 +28,12 @@ PW.println(s);
 PW.close();}
 
 catch(IOException E){
-JOptionPane.showMessageDialog(null,"Error ViP file ");}//text
+JOptionPane.showMessageDialog(null,"somthing went wrong with saving bill");}//text
 
 return s;
 
 }//end printbill
 
-public String toString () { return super.toString()+"\n"+d.toString();}
+
+public String toString () { return super.toString()+"\n"+d.toString()+"\n";}
 }//end VIP class

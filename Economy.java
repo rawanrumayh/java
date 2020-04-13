@@ -1,7 +1,7 @@
-import java.util.*;
+//import java.util.*;
 import  java.io.*; 
 import javax.swing.JOptionPane;
-public class Economy extends Car {
+public class Economy extends Car  {
 
 public Economy ( String plate, double price, String model, String color){
 super ( plate, price, model, color);}//end cons
@@ -16,11 +16,12 @@ price = price - (price*0.2);
 
 
 String s="Economy bill: \n"+super.toString()+"\n";
-s=s+"the price  :\n"+price+"\n";
+s=s+"the price  :\t \t "+price+"\n";
 
 //file
-String fileName=getCustomer().getName()+"_"+getCustomer().getId()+".text";
+
 try{
+String fileName=getCustomer().getName()+"_"+getCustomer().getId()+".text";
 //open text file
 File OUTF=new File (fileName);
 FileOutputStream SF=new FileOutputStream(OUTF);
@@ -29,7 +30,7 @@ PW.println(s);
 PW.close();}
 
 catch(IOException E){
-JOptionPane.showMessageDialog(null,"Error economy file ");}//text
+JOptionPane.showMessageDialog(null,"somthing went wrong with saving bill");}//text
 
 return s;
 }//end printbill

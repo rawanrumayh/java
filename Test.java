@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
 public class Test{
 
@@ -16,6 +15,7 @@ frame.setVisible(true);
 
 class GUI extends JFrame implements ActionListener {
 CarRental list = new CarRental (100);
+
 JTextField addCarPlateNo; JTextField addCarPrice; JTextField addCarmodel; 
 JTextField addCarcolor; JRadioButton EconomySelection; JRadioButton VIPSelection;  
 JTextField DriverID; JTextField DriverName; 
@@ -25,7 +25,6 @@ JTextField CustomerName; JTextField CustomerPhone; JTextField ReturnCarPlateNo; 
 
 public GUI (){
 
-list.loadFromFile();
 setSize(1000,800);
 setTitle("Rental System");
 
@@ -205,6 +204,8 @@ list.saveToFile();
 
 
 public void actionPerformed (ActionEvent event) {
+list.loadFromFile();
+
 try{
 if (event.getSource() instanceof JButton){
 
@@ -224,7 +225,7 @@ list.addCar(a);
 }
 
 if ( VIPSelection.isSelected() ){
-DriverName.setEnabled(true); DriverID.setEnabled(true); // not working
+DriverName.setEnabled(true); DriverID.setEnabled(true); 
 Driver driver = new Driver (Integer.parseInt(DriverID.getText()) ,DriverName.getText());
 
 VIP a = new VIP ( plateNo, price, model, color,driver );
@@ -248,10 +249,9 @@ for (int i=0; i<Ecolist.length; i++)
 if (Ecolist[i] != null )
 s+=Ecolist[i];
 
-bill.setText(s);} bill.setText("there's no available cars");
-
-break; 
-
+bill.setText(s);} bill.setText("there's no available Economy cars");
+break;
+ 
 case "Show all available VIP cars":
 VIP [] VIPlist = list.searchAvailableVIP();
 if (VIPlist !=null){ 
@@ -259,7 +259,7 @@ String w="";
 for (int i=0; i<VIPlist.length; i++){
 if (VIPlist[i] != null )
 w+=VIPlist[i];}
-bill.setText(w);} bill.setText("there's no available cars");
+bill.setText(w);} bill.setText("there's no available VIP cars");
 break; 
 
 case "Rent Car":
@@ -276,7 +276,8 @@ CustomerPhone.setText("");
 break;
 
 case "Return Car":
-list.returnCar(ReturnCarPlateNo.getText());
+plateNo = ReturnCarPlateNo.getText();
+list.returnCar(plateNo);
 ReturnCarPlateNo.setText("");
 break; }// end switch
 

@@ -1,4 +1,4 @@
-import java.util.*;
+//import java.util.*;
 import  java.io.*; 
 
 interface Payabel{
@@ -6,7 +6,7 @@ interface Payabel{
 public String printBill(int days);
 }//end payable
 
-public abstract class Car implements Payabel,Serializable 
+public abstract class Car implements Payabel, Serializable 
 {
 
 protected String plateNo;
@@ -24,7 +24,7 @@ public String getPlateNo() {
         return plateNo;
     }//
 
-    public void setPlateNo(String plateNo) {
+ /*   public void setPlateNo(String plateNo) {
         this.plateNo = plateNo;
     }//
 
@@ -49,7 +49,7 @@ public String getPlateNo() {
 
     public void setColor(String color) {
         this.color = color;
-    }//
+    }//*/
     
      public Customer getCustomer() {
         return cr;
@@ -73,15 +73,8 @@ public String getPlateNo() {
    
    
 public String toString(){ 
-String St= "Car information:\n Plate number: "+plateNo+"\t \t price per day: "+pricePerDay+"\t \t model: "+model+"\t \t color: "+color+"\t \t available : "+available +"\n"; 
-//<<<<<<< HEAD
-       
-
- if( cr != null )//coustmer
-             St = St +  " Customer : " + cr.toString()+ "\n";
+String St= "Car information:\n Plate number: "+plateNo+"\t \t price per day: "+pricePerDay+"\t \t model: "+model+"\t \t color: "+color+"\t \t available : "+available +"\n";  
         
-//>>>>>>> 96d265e67984731c2cbb22fa868f89a467d1fcd9
         return St ; }
 
-//setters getters
 }//end class car
