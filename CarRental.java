@@ -31,13 +31,13 @@ carlist[numOfCars++] = c ;
 String Type = c.getClass().getSimpleName() ;
 JOptionPane.showMessageDialog(null ,"add new " + Type + " car to system successfully");
 
-if ( c instanceof Economy){
+/*if ( c instanceof Economy){
 carlist[numOfCars++] = (Economy)c ;
 JOptionPane.showMessageDialog(null ,"an Economy Car added to the system successfully");}
 
 else if ( c instanceof VIP){
 carlist[numOfCars++] = (VIP)c ;
-JOptionPane.showMessageDialog(null ,"an VIP Car added to the system successfully");} 
+JOptionPane.showMessageDialog(null ,"an VIP Car added to the system successfully");} */
 
 }
 
@@ -152,7 +152,7 @@ for (int i=0; i<numOfCars; i++){
 if ( carlist[i] instanceof VIP ) {
 if ( carlist[i].isAvailable()==true )
 AvailableVIP [count++] = ((VIP)(carlist[i])); }}
-if(count==null)
+if(count==0)
 return null;
 return AvailableVIP;} //end searchvip
 
