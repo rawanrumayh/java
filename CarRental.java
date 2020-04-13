@@ -20,12 +20,16 @@ if( numOfCars >= carlist.length )
 JOptionPane.showMessageDialog(null ,"your list is full, you can't add another car");
 return;
 }
-// sarch  id first
+// sarch  
 for( int i =0 ; i < numOfCars ; i++ )
 if( carlist[i].getPlateNo().equals(c.getPlateNo()))
 {
-JOptionPane.showMessageDialog(null ,"sorry couldn't add this car , the plate number is already Exist");
-return ; } else continue;
+JOptionPane.showMessageDialog(null ,"sorry we cant add this car , the plate number is already Exist");
+return ; } 
+
+carlist[numOfCars++] = c ; 
+String Type = c.getClass().getSimpleName() ;
+JOptionPane.showMessageDialog(null ,"add new " + Type + " car to system successfully");
 
 if ( c instanceof Economy){
 carlist[numOfCars++] = (Economy)c ;
