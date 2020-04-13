@@ -1,5 +1,6 @@
 import java.util.*;
 import  java.io.*; 
+import java.io.Serializable;
 
 public class Customer implements Serializable  {
 

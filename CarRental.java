@@ -1,15 +1,15 @@
-import java.util.*;
 import  java.io.*; 
 import javax.swing.JOptionPane;
 public class CarRental {
 
 private  int numOfCars ;
-private Car [] carlist;
+   Car [] carlist;
 
 
 public  CarRental( int size){ //VIP or Economy
 numOfCars=0;
 carlist = new Car [size];
+loadFromFile();
 
 //Array 
 }
@@ -37,8 +37,7 @@ JOptionPane.showMessageDialog(null ,"an Economy Car added to the system successf
 
 else if ( c instanceof VIP){
 carlist[numOfCars++] = (VIP)c ;
-JOptionPane.showMessageDialog(null ,"an VIP Car added to the system successfully");}
-
+JOptionPane.showMessageDialog(null ,"an VIP Car added to the system successfully");} 
 
 }
 
@@ -151,9 +150,10 @@ VIP [] AvailableVIP = new VIP [numOfCars];
 int count =0;
 for (int i=0; i<numOfCars; i++){
 if ( carlist[i] instanceof VIP ) {
-if ( carlist[i].getAvailability()==true )
+if ( carlist[i].isAvailable()==true )
 AvailableVIP [count++] = ((VIP)(carlist[i])); }}
-
+if(count==null)
+return null;
 return AvailableVIP;} //end searchvip
 
 //
@@ -163,7 +163,7 @@ Economy [] AvailableEco = new Economy [numOfCars];
 int count =0;
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i] instanceof Economy ) {
-if ( carlist[i].getAvailability() ==true)
+if ( carlist[i].isAvailable() ==true)
 AvailableEco [count++] = (Economy)(carlist[i]); }
 if(count==0)
 return null;
@@ -176,8 +176,6 @@ public  Car getCar( String PN){
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i].getPlateNo().equals(PN) )
 return carlist[i];
-else continue;
- 
 return null;  }
 
 }// end CarRental class 
