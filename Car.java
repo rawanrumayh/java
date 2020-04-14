@@ -73,7 +73,7 @@ public String getPlateNo() {
    
    
 public String toString(){ 
-String St= "Car information:\n Plate number: "+plateNo+"\t \t price per day: "+pricePerDay+"\t \t model: "+model+"\t \t color: "+color+"\t \t available : "+available +"\n";  
+String St= "Car information:\n Type:"+this.getClass().getName()+"\t \t Plate number: "+plateNo+"\t \t price per day: "+pricePerDay+"\t \t model: "+model+"\t \t color: "+color+"\t \t available : "+available +"\n";  
         
         return St ; }
 

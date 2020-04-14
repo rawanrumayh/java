@@ -13,7 +13,7 @@ public String printBill(int days){
 double price =0;
 price = pricePerDay * days+(100*days);
 
-String s="VIP bill: \n \n"+super.toString()+"\n";
+String s= super.toString();
 s=s+d.toString()+"\n";
 s=s+"the price:"+price+"\n";
 

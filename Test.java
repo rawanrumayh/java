@@ -243,23 +243,22 @@ break;
 
 case "Show all available Economy cars": 
 Economy [] Ecolist = list.searchAvailableEconomy();
-if (Ecolist !=null){ 
-String s="";
+bill.setText("");
+if (Ecolist != null){
 for (int i=0; i<Ecolist.length; i++)
-if (Ecolist[i] != null )
-s+=Ecolist[i];
-
-bill.setText(s);} bill.setText("there's no available Economy cars");
+if (Ecolist[i]!= null){ System.out.println(Ecolist[i]);
+bill.append(Ecolist[i].toString());}}
+ bill.setText("there's no available Economy cars");
 break;
  
 case "Show all available VIP cars":
 VIP [] VIPlist = list.searchAvailableVIP();
+bill.setText("");
 if (VIPlist !=null){ 
-String w="";
-for (int i=0; i<VIPlist.length; i++){
+for (int i=0; i<VIPlist.length; i++)
 if (VIPlist[i] != null )
-w+=VIPlist[i];}
-bill.setText(w);} bill.setText("there's no available VIP cars");
+bill.append (VIPlist[i].toString() );} 
+bill.setText("there's no available VIP cars");
 break; 
 
 case "Rent Car":

@@ -15,11 +15,12 @@ carlist = new Car [size];
 }
 
 public void addCar(Car c ){
-if( numOfCars >= carlist.length )
-{
+
+if( numOfCars >= carlist.length ){
 JOptionPane.showMessageDialog(null ,"your list is full, you can't add another car");
 return;
 }
+
 // search  
 for( int i =0 ; i < numOfCars ; i++ )
 if( carlist[i].getPlateNo().equals(c.getPlateNo()))
@@ -47,7 +48,8 @@ try{
 File out =new  File ("cars.dat");
 FileOutputStream  f=new FileOutputStream(out);
 ObjectOutputStream os = new ObjectOutputStream(f);
-os.writeObject(carlist);
+for (int i=0; i<numOfCars; i++)
+os.writeObject(carlist[i]);
 
 os.close();
 JOptionPane.showMessageDialog(null , "Thank you for using <<CAR RENTAL SYSTEM >>, All changes are saved. ");  //show
@@ -71,14 +73,14 @@ File F = new File("cars.dat") ;
 FileInputStream fi = new FileInputStream(F);
 ObjectInputStream file= new ObjectInputStream( fi);
 
-if ( F.length() ==0) return;
+//if ( F.length() ==0) return;
 
 try{  
 while( true ){
 
 try{
-
-carlist = (Car[]) file.readObject();
+Car s = (Car) file.readObject();
+addCar(s);
 
 } catch(ClassNotFoundException e1 ){
 JOptionPane.showMessageDialog(null , e1.getMessage());}}
@@ -90,7 +92,7 @@ JOptionPane.showMessageDialog(null , e1.getMessage());}}
 {return;}
 
  catch(IOException ex  ){
-JOptionPane.showMessageDialog(null , "IO "+ex.getMessage());  }
+JOptionPane.showMessageDialog(null ,ex.getMessage());  }
 
 }// end load 
 
@@ -106,7 +108,7 @@ else if(car.available){
 car.setCustomer(c);
 String str=car.printBill(numOfDay);
 car.setAvailability(false);
-JOptionPane.showMessageDialog(null,"Dear "+c.getName()+" the car is rented successfully \n "+str);
+JOptionPane.showMessageDialog(null,"Dear "+c.getName()+" the car is rented successfully, your bill: \n "+str);
 }//if2
 
 else if (!car.available){

@@ -15,7 +15,7 @@ if (days>7)
 price = price - (price*0.2);
 
 
-String s="Economy bill: \n"+super.toString()+"\n";
+String s= super.toString()+"\n";
 s=s+"the price  :\t \t "+price+"\n";
 
 //file
