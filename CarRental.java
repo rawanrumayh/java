@@ -6,10 +6,10 @@ private  int numOfCars ;
    Car [] carlist;
 
 
-public  CarRental( int size){ //VIP or Economy
+public  CarRental( int size){ 
 numOfCars=0;
 carlist = new Car [size];
-//loadFromFile();
+loadFromFile();
 
 //Array 
 }
@@ -27,10 +27,6 @@ if( carlist[i].getPlateNo().equals(c.getPlateNo()))
 {
 JOptionPane.showMessageDialog(null ,"sorry we cant add this car , the plate number is already Exist");
 return ; } 
-
-/*carlist[numOfCars++] = c ; 
-String Type = c.getClass().getSimpleName() ;
-JOptionPane.showMessageDialog(null ,"add new " + Type + " car to system successfully");*/
 
 if ( c instanceof Economy){
 carlist[numOfCars++] = (Economy)c ;
@@ -55,14 +51,8 @@ os.close();
 JOptionPane.showMessageDialog(null , "Thank you for using <<CAR RENTAL SYSTEM >>, All changes are saved. ");  //show
 
 
-/*ObjectOutputStream oss=new ObjectOutputStream(f);*/} catch(IOException e){JOptionPane.showMessageDialog(null , "Error in saving this file ");  }
+} catch(IOException e){JOptionPane.showMessageDialog(null , "Error in saving this file ");  }}// end save method
 
-
-//try
-
-
-
-}
 
 
 public void loadFromFile(){
@@ -73,14 +63,13 @@ File F = new File("cars.dat") ;
 FileInputStream fi = new FileInputStream(F);
 ObjectInputStream file= new ObjectInputStream( fi);
 
-//if ( F.length() ==0) return;
 
 try{  
 while( true ){
 
 try{
 Car s = (Car) file.readObject();
-addCar(s);
+carlist[numOfCars++] = s;
 
 } catch(ClassNotFoundException e1 ){
 JOptionPane.showMessageDialog(null , e1.getMessage());}}
@@ -89,7 +78,7 @@ JOptionPane.showMessageDialog(null , e1.getMessage());}}
 {file.close();}
 
 } catch(FileNotFoundException e)
-{return;}
+{return;} // avoiding exception at first running
 
  catch(IOException ex  ){
 JOptionPane.showMessageDialog(null ,ex.getMessage());  }
@@ -139,21 +128,34 @@ JOptionPane.showMessageDialog(null,"this Car is not rented");
 //
  
 public VIP[] searchAvailableVIP(){
-JOptionPane.showMessageDialog(null,carlist);
 
-VIP [] AvailableVIP = new VIP [numOfCars];
+int num =0; 
+for (int i=0; i<numOfCars; i++)
+if ( carlist[i] instanceof VIP && carlist[i].isAvailable() ) 
+num++;
+
+if (num ==0) return null;
+
+VIP [] AvailableVIP = new VIP [num];
 int count =0;
 
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i] instanceof VIP && carlist[i].isAvailable() ) 
-AvailableVIP [count++] = ((VIP)(carlist[i])); 
+AvailableVIP [count++] = (VIP)(carlist[i]); 
 
 return AvailableVIP;} //end searchvip
 
 //
 
 public Economy[] searchAvailableEconomy() {
-Economy [] AvailableEco = new Economy [numOfCars];
+int num =0; 
+for (int i=0; i<numOfCars; i++)
+if ( carlist[i] instanceof VIP && carlist[i].isAvailable() ) 
+num++;
+
+if (num ==0) return null;
+
+Economy [] AvailableEco = new Economy [num];
 int count =0;
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i] instanceof Economy ) {
@@ -166,7 +168,6 @@ return AvailableEco;} // end searcheco
 //
 
 public  Car getCar( String PN){
-JOptionPane.showMessageDialog(null,carlist);
 
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i].getPlateNo().equals(PN) )

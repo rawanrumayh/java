@@ -1,4 +1,3 @@
-//import java.util.*;
 import  java.io.*; 
 
 interface Payabel{
@@ -20,36 +19,12 @@ public Car ( String plate, double price, String model, String color) {
 plateNo = plate; pricePerDay = price; this.model = model; this.color = color; 
 this.available=true;
 } //end const
+
+
 public String getPlateNo() {
         return plateNo;
     }//
 
- /*   public void setPlateNo(String plateNo) {
-        this.plateNo = plateNo;
-    }//
-
-    public double getPricePerDay() {
-        return pricePerDay;
-    }//
-
-    public void setPricePerDay(double pricePerDay) {
-        this.pricePerDay = pricePerDay;
-    }//
-
-    public String getModel() {
-        return model;
-    }//
-    public void setModel(String model) {
-        this.model = model;
-    }//
-
-    public String getColor() {
-        return color;
-    }//
-
-    public void setColor(String color) {
-        this.color = color;
-    }//*/
     
      public Customer getCustomer() {
         return cr;
@@ -73,7 +48,7 @@ public String getPlateNo() {
    
    
 public String toString(){ 
-String St= "Car information:\n Type:"+this.getClass().getName()+"\t \t Plate number: "+plateNo+"\t \t price per day: "+pricePerDay+"\t \t model: "+model+"\t \t color: "+color+"\t \t available : "+available +"\n";  
+String St= "Car information:\n Type: "+this.getClass().getName()+"\t \t Plate number: "+plateNo+"\n price per day: "+pricePerDay+"\t \t model: "+model+"\n  color: "+color+"\t \t available : "+available +"\n";  
         
         return St ; }
 

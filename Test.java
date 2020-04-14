@@ -5,7 +5,6 @@ import java.awt.event.*;
 public class Test{
 
 public static void main (String[]args) {
-
 GUI frame = new GUI ();
 
 frame.setVisible(true);
@@ -14,8 +13,7 @@ frame.setVisible(true);
 
 
 class GUI extends JFrame implements ActionListener {
-CarRental list = new CarRental (100);
-
+CarRental list;
 JTextField addCarPlateNo; JTextField addCarPrice; JTextField addCarmodel; 
 JTextField addCarcolor; JRadioButton EconomySelection; JRadioButton VIPSelection;  
 JTextField DriverID; JTextField DriverName; 
@@ -24,6 +22,7 @@ JTextField CustomerName; JTextField CustomerPhone; JTextField ReturnCarPlateNo; 
 
 
 public GUI (){
+list = new CarRental (100);
 
 setSize(1000,800);
 setTitle("Rental System");
@@ -40,8 +39,9 @@ image.setSize(450,700);
 image.setLocation(480,270); 
 contentPane.add(image);
 
-
-//JLabel title = new JLabel ("Car Rental System"); title.setSize(150,80); contentPane.add(title); title.setLocation(260,35);
+JLabel title = new JLabel ("Car Rental System"); title.setSize(280,60); title.setLocation(20,0); 
+title.setFont(new Font ("Jokerman", Font.PLAIN, 30));  title.setForeground(Color.gray);
+contentPane.add(title); 
 
 
 // add new car panel
@@ -51,9 +51,9 @@ addPanel.setSize(450,300); addPanel.setLocation(20,50); addPanel.setBorder(Borde
 contentPane.add(addPanel);
 
 
-JLabel imageadd = new JLabel (new ImageIcon ("x.png"));
+JLabel imageadd = new JLabel (new ImageIcon ("try.png"));
 imageadd.setSize(180,160);
-imageadd.setLocation(240,5); 
+imageadd.setLocation(260,5); 
 addPanel.add(imageadd);
 
 AddCar = new JButton("Add new Car"); AddCar.setBounds(115,270,130,20);
@@ -124,7 +124,8 @@ ShowAllVIP = new JButton("Show all available VIP cars"); ShowAllVIP.setBounds(24
 ShowInfo.add(ShowAllEco); ShowInfo.add(ShowAllVIP); 
 
 
-bill = new JTextArea (); bill.setSize(420,200); bill.setLocation(15,70); ShowInfo.add(bill); //bill.addActionListener(this);
+bill = new JTextArea (); bill.setSize(420,200); bill.setLocation(15,70); bill.setEditable(false); ShowInfo.add(bill); 
+
 
 // rent car panel
 
@@ -133,9 +134,9 @@ RentCar.setSize(400,300); RentCar.setLocation(500,50);
 RentCar.setBorder(BorderFactory.createTitledBorder("Rent Car")); 
 RentCar.setLayout(null); contentPane.add(RentCar);
 
-JLabel imagerent = new JLabel (new ImageIcon ("x.png"));
-imagerent.setSize(128,128);
-imagerent.setLocation(200,5); 
+JLabel imagerent = new JLabel (new ImageIcon ("key.png"));
+imagerent.setSize(140,90);
+imagerent.setLocation(250,20); 
 RentCar.add(imagerent);
 
 JLabel text1 = new JLabel ("plateNo :");
@@ -149,7 +150,7 @@ RentCarNumOfDays = new JTextField(); RentCarNumOfDays.setSize(132,20); RentCarNu
 // customer information panel
 
 JPanel CustomerInfo = new JPanel ();
-CustomerInfo.setSize(300,150); CustomerInfo.setLocation(20,90); 
+CustomerInfo.setSize(300,150); CustomerInfo.setLocation(20,100); 
 CustomerInfo.setBorder(BorderFactory.createTitledBorder("Customer Information")); 
 CustomerInfo.setLayout(null); RentCar.add(CustomerInfo);
 
@@ -165,7 +166,7 @@ text  = new JLabel ("phone :");
 text.setSize(56,14); text.setLocation(15,90); CustomerInfo.add(text);
 CustomerPhone = new JTextField(); CustomerPhone.setSize(132,20); CustomerPhone.setLocation(80,90); CustomerInfo.add(CustomerPhone); CustomerPhone.addActionListener(this);
 
-Rent  = new JButton("Rent Car"); Rent.setBounds(120,260,100,20);
+Rent  = new JButton("Rent Car"); Rent.setBounds(120,270,100,20);
 RentCar.add(Rent);  Rent.addActionListener(this);
 
 
@@ -204,8 +205,6 @@ list.saveToFile();
 
 
 public void actionPerformed (ActionEvent event) {
-list.loadFromFile();
-
 try{
 if (event.getSource() instanceof JButton){
 
@@ -242,30 +241,39 @@ DriverName.setText("");
 break;
 
 case "Show all available Economy cars": 
-Economy [] Ecolist = list.searchAvailableEconomy();
-bill.setText("");
-if (Ecolist != null){
+bill.setText(""); Economy [] Ecolist=null;
+
+if (list== null) JOptionPane.showMessageDialog(null,"the list is empty");
+else Ecolist = list.searchAvailableEconomy();
+
+if (Ecolist!=null){
 for (int i=0; i<Ecolist.length; i++)
-if (Ecolist[i]!= null){ System.out.println(Ecolist[i]);
-bill.append(Ecolist[i].toString());}}
- bill.setText("there's no available Economy cars");
+if (Ecolist[i]!=null)
+bill.append(Ecolist[i].toString());}
+
+else bill.setText("there's no available Economy cars");
+
+
 break;
  
 case "Show all available VIP cars":
-VIP [] VIPlist = list.searchAvailableVIP();
-bill.setText("");
-if (VIPlist !=null){ 
-for (int i=0; i<VIPlist.length; i++)
-if (VIPlist[i] != null )
-bill.append (VIPlist[i].toString() );} 
+bill.setText(""); VIP [] VIPlist=null;
+if (list== null) JOptionPane.showMessageDialog(null,"the list is empty");
+VIPlist = list.searchAvailableVIP();
+
+if (VIPlist == null )
 bill.setText("there's no available VIP cars");
+
+if (VIPlist != null ){
+for (int i=0; i<VIPlist.length; i++)
+if (VIPlist[i]!=null)
+bill.append (VIPlist[i].toString() ); }
 break; 
 
 case "Rent Car":
 String PlateNo = rentCarPlateNo.getText();
 int days = Integer.parseInt(RentCarNumOfDays.getText());
-Customer c = new Customer ( Integer.parseInt(CustomerID.getText()), CustomerName.getText(), Long.parseLong(CustomerPhone.getText()));
-list.rentCar(PlateNo, c, days);
+Customer c = new Customer ( Integer.parseInt(CustomerID.getText()), CustomerName.getText(), Long.parseLong(CustomerPhone.getText())); list.rentCar(PlateNo, c, days);
 rentCarPlateNo.setText("");
 RentCarNumOfDays.setText("");
 CustomerID.setText("");
@@ -276,6 +284,7 @@ break;
 
 case "Return Car":
 plateNo = ReturnCarPlateNo.getText();
+if (list!=null)
 list.returnCar(plateNo);
 ReturnCarPlateNo.setText("");
 break; }// end switch
@@ -286,7 +295,10 @@ if (event.getSource() instanceof JRadioButton)
 if ( EconomySelection.isSelected() ){
 DriverName.setEnabled(false); DriverID.setEnabled(false);}
 else if ( VIPSelection.isSelected() ){
-DriverName.setEnabled(true); DriverID.setEnabled(true);} } catch(NumberFormatException e) {JOptionPane.showMessageDialog(null,"invalid input");}
+DriverName.setEnabled(true); DriverID.setEnabled(true);} 
+
+} catch(NumberFormatException e) {JOptionPane.showMessageDialog(null,"please check your input");}
+
 }//end action method
 
 
@@ -297,6 +309,10 @@ DriverName.setEnabled(true); DriverID.setEnabled(true);} } catch(NumberFormatExc
 
 
 }// end class
+
+class EmptyInput extends Exception{
+public EmptyInput (String s){
+super(s);}}
 
 
 

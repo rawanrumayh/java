@@ -1,9 +1,8 @@
-//import java.util.*;
 import  java.io.*; 
 import javax.swing.JOptionPane;
 public class Economy extends Car  {
 
-public Economy ( String plate, double price, String model, String color){
+public Economy ( String plate, double price, String model, String color) {
 super ( plate, price, model, color);}//end cons
 
 
@@ -15,8 +14,8 @@ if (days>7)
 price = price - (price*0.2);
 
 
-String s= super.toString()+"\n";
-s=s+"the price  :\t \t "+price+"\n";
+String s= cr.toString()+"\n"+super.toString();
+s=s+"the price  :\t  "+price+"\n";
 
 //file
 

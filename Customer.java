@@ -1,4 +1,3 @@
-//import java.util.*;
 import  java.io.*; 
 
 public class Customer implements Serializable  {
@@ -13,7 +12,7 @@ public Customer( int id , String  name , Long  phone){
 this.id=id;this.name=name;this.phone=phone;}
 
 public String toString(){
-return "\n Customer information:\t \t id: "+id + "\t \t name "+ name +" \t \t phone: "+phone+"\n";}
+return "Customer information:\n id: "+id + "\t \t name "+ name +" \n phone: "+phone+"\n";}
 
 
 public int getId(){
@@ -25,19 +24,6 @@ public String getName(){
 return name;}
 
 
-/*public Long getPhone(){
-return phone;}
-
- public void setPhone(long phone) {
-        this.phone = phone;
-}
-  public void setName(String name) {
-        this.name = name;
-}
-
-public void setId(int id) {
-        this.id = id;
-}*/
 
 
 }//end customer class

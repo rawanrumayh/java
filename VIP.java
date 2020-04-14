@@ -1,4 +1,3 @@
-//import java.util.*;
 import  java.io.*; 
 import javax.swing.JOptionPane;
 public class VIP extends Car {
@@ -13,12 +12,12 @@ public String printBill(int days){
 double price =0;
 price = pricePerDay * days+(100*days);
 
-String s= super.toString();
+String s= cr.toString()+"\n"+super.toString();
 s=s+d.toString()+"\n";
 s=s+"the price:"+price+"\n";
 
 try{
-String FileName= getCustomer().getName()+"_"+getCustomer().getId()+".text";
+String FileName= cr.getName()+"_"+cr.getId()+".text";
 //open file text
 
 File OUTF=new File (FileName);
