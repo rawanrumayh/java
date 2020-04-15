@@ -184,7 +184,7 @@ ReturnCarPlateNo = new JTextField(); ReturnCarPlateNo.setSize(132,20); ReturnCar
 JButton Return = new JButton("Return Car"); Return.setBounds(120,90,100,20); ReturnCar.add(Return); Return.addActionListener(this);
 
 
-setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//////
+setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 addWindowListener(new java.awt.event.WindowAdapter() {
 public void windowClosing(java.awt.event.WindowEvent e) {
 int PromptResult = JOptionPane.showConfirmDialog(null,"Do you want to save your changes?","before closing",JOptionPane.YES_NO_CANCEL_OPTION);
