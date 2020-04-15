@@ -16,7 +16,7 @@ loadFromFile();
 
 public void addCar(Car c ){
 
-if( numOfCars >= carlist.length ){
+if( numOfCars >= carlist.length || numOfCars<0 ){
 JOptionPane.showMessageDialog(null ,"your list is full, you can't add another car");
 return;
 }
@@ -97,7 +97,7 @@ else if(car.available){
 car.setCustomer(c);
 String str=car.printBill(numOfDay);
 car.setAvailability(false);
-JOptionPane.showMessageDialog(null,"Dear "+c.getName()+" the car is rented successfully, your bill: \n "+str);
+JOptionPane.showMessageDialog(null,"Dear "+c.getName()+" the car is rented successfully, your bill: \n \n "+str);
 }//if2
 
 else if (!car.available){
@@ -129,14 +129,14 @@ JOptionPane.showMessageDialog(null,"this Car is not rented");
  
 public VIP[] searchAvailableVIP(){
 
-int num =0; 
+/*int num =0; 
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i] instanceof VIP && carlist[i].isAvailable() ) 
-num++;
+num++;*/
 
-if (num ==0) return null;
+if (numOfCars == 0) return null;
 
-VIP [] AvailableVIP = new VIP [num];
+VIP [] AvailableVIP = new VIP [numOfCars];
 int count =0;
 
 for (int i=0; i<numOfCars; i++)
@@ -148,14 +148,16 @@ return AvailableVIP;} //end searchvip
 //
 
 public Economy[] searchAvailableEconomy() {
-int num =0; 
+/*int num =0; 
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i] instanceof VIP && carlist[i].isAvailable() ) 
 num++;
 
-if (num ==0) return null;
+if (num ==0) return null;*/
 
-Economy [] AvailableEco = new Economy [num];
+if (numOfCars == 0) return null;
+
+Economy [] AvailableEco = new Economy [numOfCars];
 int count =0;
 for (int i=0; i<numOfCars; i++)
 if ( carlist[i] instanceof Economy ) {

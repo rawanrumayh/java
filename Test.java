@@ -295,7 +295,7 @@ break;
 case "Show all available VIP cars":
 bill.setText(""); VIP [] VIPlist=null;
 if (list== null) JOptionPane.showMessageDialog(null,"the list is empty");
-VIPlist = list.searchAvailableVIP();
+else VIPlist = list.searchAvailableVIP();
 
 if (VIPlist == null )
 bill.setText("there's no available VIP cars");
@@ -321,7 +321,7 @@ try{ if ( Integer.parseInt(days)>0 && phone.length() == 10 && phone.substring(0,
 
 Customer c = new Customer ( Integer.parseInt(CID), CName, Long.parseLong(phone)); 
 list.rentCar(PlateNo, c, Integer.parseInt(days));}
-else throw new AnException( "please check that number of days is greater than 0 \n and ypur phone number consists of 10 digis and starts with 05");
+else throw new AnException( "please check that number of days is greater than 0 \n and your phone number consists of 10 digis and starts with 05");
 }catch (NumberFormatException e) {JOptionPane.showMessageDialog(null, " please number of days, customer id, and phone should consist of numbers only" );return;}  
  catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); return;}
 
