@@ -211,7 +211,7 @@ public void actionPerformed (ActionEvent event) {
 if (event.getSource() instanceof JButton){
 
 String text= ((JButton)(event.getSource())).getText();
-try{
+
 switch (text){
 case "Add new Car": 
 String plateNo = addCarPlateNo.getText();
@@ -222,23 +222,28 @@ String color = addCarcolor.getText();
 
 try{ if ( plateNo.equals("") || price.equals("") || model.equals("") || color.equals(""))
 throw new  AnException( "please complete the information");
-} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage());}
+} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); return;}
 
 try{ if ( Double.parseDouble(price) >0 ) {
 
 if ( EconomySelection.isSelected() ){
+try{
 DriverName.setEnabled(false);  DriverID.setEnabled(false);
 Economy a = new Economy ( plateNo, Double.parseDouble(price), model, color );
-list.addCar(a);} 
-
-} else throw new  AnException( "please price should be greater than 0 "); 
-} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); 
+list.addCar(a);
 addCarPlateNo.setText("");
 addCarPrice.setText("");
 addCarmodel.setText("");
 addCarcolor.setText("");
 DriverID.setText("");
-DriverName.setText("");} // end catch
+DriverName.setText("");} 
+
+catch (NumberFormatException e) {JOptionPane.showMessageDialog(null, " please enter price of numbers only" ); return;} }//end if 
+
+
+} else throw new  AnException( "please price should be greater than 0 "); 
+}catch (NumberFormatException e) {JOptionPane.showMessageDialog(null, " please enter price of numbers only" ); return;}
+ catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); return;} // end catch
 
 
 if ( VIPSelection.isSelected() ){
@@ -249,31 +254,27 @@ String DName = DriverName.getText();
 
 try{ if ( DID.equals("") || DName.equals("") )
 throw new  AnException( "please complete the information");
-} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage());}
+} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); return;}
+  
 
-
+try { 
 Driver driver = new Driver (Integer.parseInt(DID) ,DName);
-
-try { if (Double.parseDouble(price) >0){
+if (Double.parseDouble(price) >0){
 VIP a = new VIP ( plateNo,  Double.parseDouble(price), model, color,driver );
-list.addCar(a);
-} else throw new  AnException( "please price should be greater than 0 "); 
-} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); 
-addCarPlateNo.setText("");
-addCarPrice.setText("");
-addCarmodel.setText("");
-addCarcolor.setText("");
-DriverID.setText("");
-DriverName.setText("");} 
-} 
 
+list.addCar(a);
 addCarPlateNo.setText("");
 addCarPrice.setText("");
 addCarmodel.setText("");
 addCarcolor.setText("");
 DriverID.setText("");
-DriverName.setText("");
-break;
+DriverName.setText("");}
+ 
+else throw new  AnException( "please price should be greater than 0 "); 
+} catch (NumberFormatException e) {JOptionPane.showMessageDialog(null, " please enter price or driver id of numbers only" );}  
+catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); return; } // end catch 
+ }
+break; 
 
 case "Show all available Economy cars": 
 bill.setText(""); Economy [] Ecolist=null;
@@ -314,14 +315,15 @@ String phone = CustomerPhone.getText();
 
 try{ if ( PlateNo.equals("") || days.equals("") || CID.equals("") || CName.equals("") || phone.equals(""))
 throw new  AnException( "please complete the information");
-} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage());}
+}  catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); return;}
 
-try{ if ( Integer.parseInt(days)>0 && phone.length() == 10 && phone.substring(0,2).equals(05)){
+try{ if ( Integer.parseInt(days)>0 && phone.length() == 10 && phone.substring(0,2).equals("05")){
 
 Customer c = new Customer ( Integer.parseInt(CID), CName, Long.parseLong(phone)); 
 list.rentCar(PlateNo, c, Integer.parseInt(days));}
-else throw new AnException( "please check number of days or your phone, days must be greater than 0 \n the number must consist of 10 digis and starts with 05");
-} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage());}
+else throw new AnException( "please check that number of days is greater than 0 \n and ypur phone number consists of 10 digis and starts with 05");
+}catch (NumberFormatException e) {JOptionPane.showMessageDialog(null, " please number of days, customer id, and phone should consist of numbers only" );return;}  
+ catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); return;}
 
 
 
@@ -338,13 +340,12 @@ plateNo = ReturnCarPlateNo.getText();
 
 try{ if ( plateNo.equals("") )
 throw new  AnException( "please complete the information");
-} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage());}
+} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); return;}
 
 if (list!=null && !plateNo.equals(""))
 list.returnCar(plateNo);
 ReturnCarPlateNo.setText("");
 break; }// end switch
-} catch(NumberFormatException e) {JOptionPane.showMessageDialog(null, "invaild "+e.getMessage()+" please enter digits only" );}
 
 }// end if instance of jbutton
 
