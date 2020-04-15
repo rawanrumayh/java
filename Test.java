@@ -205,31 +205,65 @@ list.saveToFile();
 
 
 public void actionPerformed (ActionEvent event) {
-try{
+
 if (event.getSource() instanceof JButton){
 
 String text= ((JButton)(event.getSource())).getText();
+try{
 switch (text){
 case "Add new Car": 
 String plateNo = addCarPlateNo.getText();
-double price= Double.parseDouble(addCarPrice.getText());
+String price= addCarPrice.getText();
 String model = addCarmodel.getText();
 String color = addCarcolor.getText();
 
 
+try{ if ( plateNo.equals("") || price.equals("") || model.equals("") || color.equals(""))
+throw new  AnException( "please complete the information");
+} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage());}
+
+try{ if ( Double.parseDouble(price) >0 ) {
+
 if ( EconomySelection.isSelected() ){
 DriverName.setEnabled(false);  DriverID.setEnabled(false);
-Economy a = new Economy ( plateNo, price, model, color );
-list.addCar(a);
-}
+Economy a = new Economy ( plateNo, Double.parseDouble(price), model, color );
+list.addCar(a);} 
+
+} else throw new  AnException( "please price should be greater than 0 "); 
+} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); 
+addCarPlateNo.setText("");
+addCarPrice.setText("");
+addCarmodel.setText("");
+addCarcolor.setText("");
+DriverID.setText("");
+DriverName.setText("");} // end catch
+
 
 if ( VIPSelection.isSelected() ){
 DriverName.setEnabled(true); DriverID.setEnabled(true); 
-Driver driver = new Driver (Integer.parseInt(DriverID.getText()) ,DriverName.getText());
 
-VIP a = new VIP ( plateNo, price, model, color,driver );
+String DID = DriverID.getText();
+String DName = DriverName.getText(); 
+
+try{ if ( DID.equals("") || DName.equals("") )
+throw new  AnException( "please complete the information");
+} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage());}
+
+
+Driver driver = new Driver (Integer.parseInt(DID) ,DName);
+
+try { if (Double.parseDouble(price) >0){
+VIP a = new VIP ( plateNo,  Double.parseDouble(price), model, color,driver );
 list.addCar(a);
-}
+} else throw new  AnException( "please price should be greater than 0 "); 
+} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); 
+addCarPlateNo.setText("");
+addCarPrice.setText("");
+addCarmodel.setText("");
+addCarcolor.setText("");
+DriverID.setText("");
+DriverName.setText("");} 
+} 
 
 addCarPlateNo.setText("");
 addCarPrice.setText("");
@@ -237,7 +271,6 @@ addCarmodel.setText("");
 addCarcolor.setText("");
 DriverID.setText("");
 DriverName.setText("");
-
 break;
 
 case "Show all available Economy cars": 
@@ -272,8 +305,24 @@ break;
 
 case "Rent Car":
 String PlateNo = rentCarPlateNo.getText();
-int days = Integer.parseInt(RentCarNumOfDays.getText());
-Customer c = new Customer ( Integer.parseInt(CustomerID.getText()), CustomerName.getText(), Long.parseLong(CustomerPhone.getText())); list.rentCar(PlateNo, c, days);
+String days = RentCarNumOfDays.getText();
+String CID = CustomerID.getText();
+String CName = CustomerName.getText();
+String phone = CustomerPhone.getText();
+
+try{ if ( PlateNo.equals("") || days.equals("") || CID.equals("") || CName.equals("") || phone.equals(""))
+throw new  AnException( "please complete the information");
+} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage());}
+
+try{ if ( Integer.parseInt(days)>0 && phone.length() == 10 && phone.substring(0,2).equals(05)){
+
+Customer c = new Customer ( Integer.parseInt(CID), CName, Long.parseLong(phone)); 
+list.rentCar(PlateNo, c, Integer.parseInt(days));}
+else throw new AnException( "please check number of days or your phone, days must be greater than 0 \n the number must consist of 10 digis and starts with 05");
+} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage());}
+
+
+
 rentCarPlateNo.setText("");
 RentCarNumOfDays.setText("");
 CustomerID.setText("");
@@ -284,10 +333,16 @@ break;
 
 case "Return Car":
 plateNo = ReturnCarPlateNo.getText();
-if (list!=null)
+
+try{ if ( plateNo.equals("") )
+throw new  AnException( "please complete the information");
+} catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage());}
+
+if (list!=null && !plateNo.equals(""))
 list.returnCar(plateNo);
 ReturnCarPlateNo.setText("");
 break; }// end switch
+} catch(NumberFormatException e) {JOptionPane.showMessageDialog(null, "invaild "+e.getMessage()+" please enter digits only" );}
 
 }// end if instance of jbutton
 
@@ -297,7 +352,6 @@ DriverName.setEnabled(false); DriverID.setEnabled(false);}
 else if ( VIPSelection.isSelected() ){
 DriverName.setEnabled(true); DriverID.setEnabled(true);} 
 
-} catch(NumberFormatException e) {JOptionPane.showMessageDialog(null,"please check your input");}
 
 }//end action method
 
@@ -310,8 +364,8 @@ DriverName.setEnabled(true); DriverID.setEnabled(true);}
 
 }// end class
 
-class EmptyInput extends Exception{
-public EmptyInput (String s){
+class AnException extends Exception{
+public AnException (String s){
 super(s);}}
 
 
