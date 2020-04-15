@@ -129,10 +129,6 @@ JOptionPane.showMessageDialog(null,"this Car is not rented");
  
 public VIP[] searchAvailableVIP(){
 
-/*int num =0; 
-for (int i=0; i<numOfCars; i++)
-if ( carlist[i] instanceof VIP && carlist[i].isAvailable() ) 
-num++;*/
 
 if (numOfCars == 0) return null;
 
@@ -148,12 +144,7 @@ return AvailableVIP;} //end searchvip
 //
 
 public Economy[] searchAvailableEconomy() {
-/*int num =0; 
-for (int i=0; i<numOfCars; i++)
-if ( carlist[i] instanceof VIP && carlist[i].isAvailable() ) 
-num++;
 
-if (num ==0) return null;*/
 
 if (numOfCars == 0) return null;
 

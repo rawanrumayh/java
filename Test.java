@@ -13,12 +13,13 @@ frame.setVisible(true);
 
 
 class GUI extends JFrame implements ActionListener {
-CarRental list;
-JTextField addCarPlateNo; JTextField addCarPrice; JTextField addCarmodel; 
-JTextField addCarcolor; JRadioButton EconomySelection; JRadioButton VIPSelection;  
-JTextField DriverID; JTextField DriverName; 
-JTextField rentCarPlateNo; JTextField RentCarNumOfDays; JTextField CustomerID;
-JTextField CustomerName; JTextField CustomerPhone; JTextField ReturnCarPlateNo; JPanel driverPanel; JTextArea bill;
+private CarRental list;
+private JTextField addCarPlateNo; private JTextField addCarPrice;        private JTextField addCarmodel; 
+private JTextField addCarcolor;   private JRadioButton EconomySelection; private JRadioButton VIPSelection;  
+private JTextField DriverID;      private JTextField DriverName; 
+private JTextField rentCarPlateNo;private  JTextField RentCarNumOfDays;  private JTextField CustomerID;
+private JTextField CustomerName;  private JTextField CustomerPhone;      private JTextField ReturnCarPlateNo; 
+private JPanel driverPanel;       private JTextArea bill;
 
 
 public GUI (){
@@ -231,6 +232,7 @@ try{
 DriverName.setEnabled(false);  DriverID.setEnabled(false);
 Economy a = new Economy ( plateNo, Double.parseDouble(price), model, color );
 list.addCar(a);
+bill.setText("");
 addCarPlateNo.setText("");
 addCarPrice.setText("");
 addCarmodel.setText("");
@@ -320,7 +322,7 @@ throw new  AnException( "please complete the information");
 try{ if ( Integer.parseInt(days)>0 && phone.length() == 10 && phone.substring(0,2).equals("05")){
 
 Customer c = new Customer ( Integer.parseInt(CID), CName, Long.parseLong(phone)); 
-list.rentCar(PlateNo, c, Integer.parseInt(days));}
+list.rentCar(PlateNo, c, Integer.parseInt(days)); bill.setText("");}
 else throw new AnException( "please check that number of days is greater than 0 \n and your phone number consists of 10 digis and starts with 05");
 }catch (NumberFormatException e) {JOptionPane.showMessageDialog(null, " please number of days, customer id, and phone should consist of numbers only" );return;}  
  catch( AnException e) {JOptionPane.showMessageDialog(null,e.getMessage()); return;}
@@ -345,6 +347,7 @@ throw new  AnException( "please complete the information");
 if (list!=null && !plateNo.equals(""))
 list.returnCar(plateNo);
 ReturnCarPlateNo.setText("");
+bill.setText("");
 break; }// end switch
 
 }// end if instance of jbutton

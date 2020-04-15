@@ -15,7 +15,7 @@ price = price - (price*0.2);
 
 
 String s= cr.toString()+"\n"+super.toString();
-s=s+"the price  :\t  "+price+"\n";
+s=s+"\n the price  :\t  "+price+"\n";
 
 //file
 
