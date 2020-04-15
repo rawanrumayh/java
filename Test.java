@@ -191,8 +191,10 @@ int PromptResult = JOptionPane.showConfirmDialog(null,"Do you want to save your 
 if(PromptResult==JOptionPane.YES_OPTION){
 list.saveToFile();
  System.exit(0); }
- if(PromptResult==JOptionPane.NO_OPTION)
- System.exit(0); 
+ 
+ if(PromptResult==JOptionPane.NO_OPTION){
+ JOptionPane.showMessageDialog(null , "Thank you... it was a pleasure to serve you");
+ System.exit(0); } // end if no
    }});
 
 
